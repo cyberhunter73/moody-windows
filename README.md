@@ -2,7 +2,16 @@
 
 A free, open-source Windows teleprompter overlay inspired by [Moody](https://moody.mjarosz.com/)
 ($39, Mac-only). Floats on top of everything, stays invisible to screen share/recording/screenshots,
-and auto-scrolls your script based on your voice.
+and auto-scrolls your script based on your voice — so you can read naturally while recording a
+video, presenting on a call, or livestreaming, without anyone seeing the prompter.
+
+![Moody floating over the desktop — transparent overlay with the script editor open](docs/screenshot.png)
+
+## System requirements
+
+- Windows 10 (2004+) or Windows 11 — needed for the screen-capture-exclusion feature
+- A microphone, for voice-activated scrolling (optional — you can also scroll at a fixed manual speed)
+- No account, no internet connection required to run it; nothing is uploaded anywhere
 
 ## Download
 
@@ -12,6 +21,30 @@ couple seconds and adds a Desktop + Start Menu shortcut.
 
 Windows SmartScreen may warn "unknown publisher" since this isn't code-signed — click
 **More info → Run anyway**.
+
+## Getting started
+
+1. Launch **Moody** from the Desktop or Start Menu shortcut the installer created. A small
+   floating window appears — drag its top bar to position it near your camera.
+2. Click **Edit**, paste or type your script, then click **Start Prompting →**.
+3. The first time you play or use voice-activated scrolling, Windows will ask for microphone
+   permission — click **Allow**. (If you miss it, re-enable it under
+   **Settings → Privacy & security → Microphone** and allow desktop apps access.)
+4. Click the ▶ play button (or press `Space`) to start. With "Voice-activated" checked, the
+   script scrolls while you talk and pauses when you stop — no manual control needed. Uncheck it
+   to scroll at a constant speed instead.
+5. Use the ⚙ gear icon to adjust text color, size, background opacity, and voice sensitivity.
+6. Share your screen or start recording as normal — the Moody window will not appear to your
+   viewers or in the recording, only to you.
+
+See **Shortcuts** below for moving the window out of the way, hiding it, or quitting.
+
+## Uninstall
+
+Use **Settings → Apps → Installed apps**, search for "Moody for Windows", and click Uninstall —
+or run `Uninstall Moody for Windows.exe` directly from its install folder
+(`%LOCALAPPDATA%\Programs\moody-windows`). It's a per-user install, so no admin rights are needed
+either way.
 
 ## Run from source instead
 
