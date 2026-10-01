@@ -1,15 +1,33 @@
 # Moody for Windows
 
-A Windows teleprompter overlay inspired by [Moody](https://moody.mjarosz.com/) (Mac-only).
-Floats on top of everything, stays invisible to screen share/recording/screenshots, and
-auto-scrolls your script based on your voice.
+A free, open-source Windows teleprompter overlay inspired by [Moody](https://moody.mjarosz.com/)
+($39, Mac-only). Floats on top of everything, stays invisible to screen share/recording/screenshots,
+and auto-scrolls your script based on your voice.
 
-## Run it
+## Download
+
+**[⬇ Download the latest installer](https://github.com/cyberhunter73/moody-windows/releases/latest)**
+— grab the `.exe` under Assets, double-click it, done. No admin rights needed; it installs in a
+couple seconds and adds a Desktop + Start Menu shortcut.
+
+Windows SmartScreen may warn "unknown publisher" since this isn't code-signed — click
+**More info → Run anyway**.
+
+## Run from source instead
 
 ```
 npm install
 npm start
 ```
+
+## Build the installer yourself
+
+```
+npm install
+npm run dist
+```
+
+The installer is written to `dist/Moody for Windows Setup <version>.exe`.
 
 ## How it works
 
@@ -37,12 +55,6 @@ npm start
 | `Space` | Play/pause scrolling (while prompter is focused) |
 | `Up` / `Down` | Adjust manual scroll speed |
 | `Esc` | Pause |
-
-## Packaging as a standalone .exe
-
-Not set up yet. When you're ready to ship a double-click installer instead of running via
-`npm start`, add [electron-builder](https://www.electron.build/) and configure a `build` block
-in `package.json`, then run `npx electron-builder --win`.
 
 ## Known limitations vs. the Mac original
 
