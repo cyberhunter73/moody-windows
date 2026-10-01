@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Moody for Windows</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="titlebar">
+      <div id="drag-area">
+        <span id="dot" class="dot dot-idle" title="Mic status"></span>
+        <span id="title-label">Moody</span>
+      </div>
+      <div id="titlebar-controls" class="no-drag">
+        <button id="btn-edit" class="tbtn" title="Edit script">Edit</button>
+        <button id="btn-settings" class="tbtn" title="Settings">⚙</button>
+        <button id="btn-clickthrough" class="tbtn" title="Toggle click-through (Ctrl+Alt+I)">⧉</button>
+        <button id="btn-minimize" class="tbtn" title="Hide (Ctrl+Alt+H)">—</button>
+        <button id="btn-close" class="tbtn tbtn-close" title="Quit (Ctrl+Alt+Q)">×</button>
+      </div>
+    </div>
+
+    <!-- EDITOR VIEW -->
+    <div id="editor-view" class="view">
+      <textarea id="script-input" placeholder="Paste or write your script here, then click Prompt to start..."></textarea>
+      <div class="editor-footer">
+        <button id="btn-to-prompt" class="primary-btn">Start Prompting →</button>
+      </div>
+    </div>
+
+    <!-- PROMPTER VIEW -->
+    <div id="prompter-view" class="view hidden">
+      <div id="prompter-text-wrap">
+        <div id="prompter-text"></div>
+      </div>
+      <div id="center-line"></div>
+      <div id="countdown-overlay" class="hidden"><span id="countdown-number">3</span></div>
+    </div>
+
+    <!-- BOTTOM CONTROL BAR (prompter mode) -->
+    <div id="controlbar" class="no-drag hidden">
+      <button id="btn-playpause" class="cbtn" title="Play/Pause (Space)">▶</button>
+      <div class="meter-wrap" title="Voice level">
+        <div id="meter-fill"></div>
+      </div>
+      <label class="small-label">
+        <input type="checkbox" id="chk-voice" checked /> Voice-activated
+      </label>
+      <label class="small-label">
+        Speed
+        <input type="range" id="rng-speed" min="1" max="10" value="4" />
+      </label>
+      <button id="btn-font-minus" class="cbtn" title="Smaller text">A−</button>
+      <button id="btn-font-plus" class="cbtn" title="Larger text">A+</button>
+      <button id="btn-mirror" class="cbtn" title="Mirror text (for teleprompter glass)">⇋</button>
+      <button id="btn-timer" class="cbtn" title="Start with 3s countdown">⏱</button>
+    </div>
+
+    <!-- SETTINGS PANEL -->
+    <div id="settings-panel" class="panel no-drag hidden">
+      <h3>Settings</h3>
+      <label>Text color
+        <input type="color" id="set-color" value="#ffffff" />
+      </label>
+      <label>Background opacity
+        <input type="range" id="set-bg-opacity" min="0" max="100" value="55" />
+      </label>
+      <label>Voice sensitivity
+        <input type="range" id="set-sensitivity" min="1" max="10" value="5" />
+      </label>
+      <label>Font size
+        <input type="range" id="set-fontsize" min="16" max="72" value="32" />
+      </label>
+      <p class="hint">
+        Ctrl+Alt+I — toggle click-through (lets clicks pass to apps beneath)<br/>
+        Ctrl+Alt+H — show/hide window<br/>
+        Ctrl+Alt+Q — quit<br/>
+        Hover the prompter text to pause auto-scroll.
+      </p>
+      <button id="btn-settings-close" class="primary-btn">Done</button>
+    </div>
+
+    <div id="resize-grip" class="no-drag"></div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
