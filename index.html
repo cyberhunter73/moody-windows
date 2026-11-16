@@ -47,7 +47,8 @@
       <label class="small-label">
         <input type="checkbox" id="chk-voice" checked /> Voice-activated
       </label>
-      <label class="small-label">
+      <span id="mic-warn" class="mic-warn hidden"></span>
+      <label class="small-label" title="Speed and the Up/Down arrow keys only apply when Voice-activated is off">
         Speed
         <input type="range" id="rng-speed" min="1" max="10" value="4" />
       </label>
@@ -66,6 +67,9 @@
       <label>Background opacity
         <input type="range" id="set-bg-opacity" min="0" max="100" value="55" />
       </label>
+      <label>Microphone
+        <select id="set-mic"><option value="">System default</option></select>
+      </label>
       <label>Voice sensitivity
         <input type="range" id="set-sensitivity" min="1" max="10" value="5" />
       </label>
@@ -73,6 +77,8 @@
         <input type="range" id="set-fontsize" min="16" max="72" value="32" />
       </label>
       <p class="hint">
+        Sensitivity: higher reacts to quieter speech (lower voice threshold).<br/>
+        Speed and the Up/Down arrow keys only apply when Voice-activated is off.<br/>
         Ctrl+Alt+I — toggle click-through (lets clicks pass to apps beneath)<br/>
         Ctrl+Alt+H — show/hide window<br/>
         Ctrl+Alt+Q — quit<br/>
