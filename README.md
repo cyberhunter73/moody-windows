@@ -33,11 +33,20 @@ Windows SmartScreen may warn "unknown publisher" since this isn't code-signed �
 4. Click the ▶ play button (or press `Space`) to start. With "Voice-activated" checked, the
    script scrolls while you talk and pauses when you stop — no manual control needed. Uncheck it
    to scroll at a constant speed instead.
-5. Use the ⚙ gear icon to adjust text color, size, background opacity, and voice sensitivity.
+5. Use the ⚙ gear icon to choose your **Microphone** and adjust text color, size, background
+   opacity, and voice sensitivity.
 6. Share your screen or start recording as normal — the Moody window will not appear to your
    viewers or in the recording, only to you.
 
 See **Shortcuts** below for moving the window out of the way, hiding it, or quitting.
+
+## Troubleshooting
+
+**Text doesn't scroll when I talk.** Open the ⚙ settings and pick your microphone under
+**Microphone**. Moody starts on the Windows default input, which is sometimes a device that
+isn't actually your mic (or one that's silent). The red status dot and hint show when the
+selected mic isn't delivering audio. If it picks up your voice but scrolls too eagerly or not
+enough, adjust **Voice sensitivity**.
 
 ## Uninstall
 
@@ -72,6 +81,16 @@ The installer is written to `dist/Moody for Windows Setup <version>.exe`.
 - **Voice-activated scrolling** — reads your mic volume via the Web Audio API; scroll speed tracks
   how loud/fast you're talking, and it pauses automatically when you stop. Toggle it off in the
   control bar to use a constant manual speed instead.
+- **Microphone picker** — Settings → Microphone lists every input device ("System default" is
+  the initial choice). Your pick is remembered, and the list updates when you plug in or unplug
+  a mic. If the chosen mic can't be opened, Moody falls back to the system default.
+- **Voice sensitivity** — sets how loud you must be before the script moves. Higher values react
+  to quieter speech (lower threshold); lower values ignore more background noise.
+- **Dead-mic warning** — if the mic reports no signal, or nothing loud enough is picked up for
+  about 3 seconds while playing, the status dot turns red and a hint appears in the control bar
+  pointing you to Settings → Microphone. It clears as soon as audio arrives.
+- **Speed and arrow keys** — the Speed slider and `Up`/`Down` keys only apply when
+  **Voice-activated** is turned off.
 - **Script editor** — click "Edit" to write/paste your script, "Start Prompting" to go live.
 - **Customization** — font size, text color, background opacity, mirror mode (for teleprompter
   glass rigs), via the gear icon.
@@ -86,7 +105,7 @@ The installer is written to `dist/Moody for Windows Setup <version>.exe`.
 | `Ctrl+Alt+H` | Show/hide the window |
 | `Ctrl+Alt+Q` | Quit |
 | `Space` | Play/pause scrolling (while prompter is focused) |
-| `Up` / `Down` | Adjust manual scroll speed |
+| `Up` / `Down` | Adjust manual scroll speed (only when Voice-activated is off) |
 | `Esc` | Pause |
 
 ## Known limitations vs. the Mac original

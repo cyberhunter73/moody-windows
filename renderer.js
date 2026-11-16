@@ -266,18 +266,16 @@ function setMicWarning(text) {
   dot.classList.toggle('dot-warn', !!text);
 }
 
-// Saved choice wins ('' = system default); with none saved, prefer a Yeti.
-function effectiveMicId(inputs) {
-  if (typeof state.micDeviceId === 'string') return state.micDeviceId;
-  const yeti = (inputs || []).find((d) => /yeti/i.test(d.label));
-  return yeti ? yeti.deviceId : '';
+// Saved choice wins; '' (or nothing saved) means the system default mic.
+function effectiveMicId() {
+  return typeof state.micDeviceId === 'string' ? state.micDeviceId : '';
 }
 
 async function populateMics() {
   let devices = [];
   try { devices = await navigator.mediaDevices.enumerateDevices(); } catch (e) { return []; }
   const inputs = devices.filter((d) => d.kind === 'audioinput' && d.deviceId !== 'default' && d.deviceId !== 'communications');
-  const wanted = effectiveMicId(inputs);
+  const wanted = effectiveMicId();
   setMic.innerHTML = '';
   const def = document.createElement('option');
   def.value = '';
@@ -317,22 +315,13 @@ async function ensureMic() {
   micOpening = true;
   micErrorText = '';
   try {
-    // Device picked by the dropdown (which already folds in the Yeti preference).
-    let id = effectiveMicId((await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'audioinput'));
+    const id = effectiveMicId();
     try {
       micStream = await openStream(id);
     } catch (err) {
       if (!id) throw err;
       console.warn('Selected mic failed, falling back to default:', err);
       micStream = await openStream('');
-    }
-    // No saved choice and labels were hidden before permission: look again for a Yeti.
-    if (typeof state.micDeviceId !== 'string' && !id) {
-      const pref = effectiveMicId(await populateMics());
-      if (pref) {
-        micStream.getTracks().forEach((t) => t.stop());
-        try { micStream = await openStream(pref); } catch (e) { micStream = await openStream(''); }
-      }
     }
     audioCtx = new AudioContext();
     const source = audioCtx.createMediaStreamSource(micStream);
@@ -351,7 +340,7 @@ async function ensureMic() {
   } catch (err) {
     console.error('Mic access failed:', err);
     micErrorText = 'Mic access failed: ' + err.message;
-    setMicWarning('Mic unavailable - pick another in Settings.');
+    setMicWarning('Mic unavailable. Pick your microphone in Settings > Microphone.');
     dot.title = micErrorText;
   } finally {
     micOpening = false;
@@ -365,14 +354,14 @@ function checkDeadMic(rms) {
   if (!scrolling) { micWindowStart = now; micPeak = 0; return; }
   micPeak = Math.max(micPeak, rms);
   if (track && track.muted) {
-    setMicWarning('No signal: this mic is muted/dead. Pick another in Settings.');
+    setMicWarning('No signal from this mic. Pick your microphone in Settings > Microphone.');
     return;
   }
   if (micPeak >= voiceThreshold()) {
     if (micWarn.textContent) setMicWarning('');
     micWindowStart = now; micPeak = 0;
   } else if (now - micWindowStart > 3000) {
-    setMicWarning('No audio picked up for 3s - check the mic in Settings.');
+    setMicWarning('No audio picked up for 3s. Pick your microphone in Settings > Microphone.');
   }
 }
 
